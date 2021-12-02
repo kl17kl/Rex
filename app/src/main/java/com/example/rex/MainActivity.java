@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        System.out.println("Jesse peanut");
+                        System.out.println("kt peanut");
                         break;
                     case 1:
                         System.out.println("tab 2");
