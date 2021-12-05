@@ -6,27 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/musicButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Music" />
+            android:layout_weight="1"
+            android:backgroundTint="#70FFA5"
+            android:onClick="selectMusic"
+            android:text="Music"></Button>
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/moviesButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Movies" />
+            android:layout_weight="1"
+            android:backgroundTint="#9B9B9B"
+            android:onClick="selectMovies"
+            android:text="Movies"></Button>
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/showsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Shows" />
+            android:layout_weight="1"
+            android:backgroundTint="#9B9B9B"
+            android:onClick="selectShows"
+            android:text="Shows"></Button>
+    </LinearLayout>
 
-    </com.google.android.material.tabs.TabLayout>
+    <LinearLayout
+        android:background="@drawable/customborder"
+        app:layout_constraintTop_toBottomOf="@id/LinearLayout01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/searchBox"
+        android:backgroundTint="@color/white"
+        android:hint="Search"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:textSize="22dp"
+        android:text=""/>
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#9B9B9B"
+            android:onClick="doSearch"
+            android:text="Search"></Button>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
