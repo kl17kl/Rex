@@ -23,7 +23,6 @@ public class APIThread extends Thread {
         t = type;
         l = limit;
         i = info;
-        System.out.println("Thread created:"+query+" t:"+type+" l:"+limit+" i:"+info);
     }
 
 
@@ -40,15 +39,15 @@ public class APIThread extends Thread {
             URL url = new URL(stringUrl);
             System.out.println(stringUrl);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            System.out.println("Connection established");
 
             // Setting up the input stream and buffer readers
-            InputStream in = urlConnection.getInputStream(); //****THIS DOES NOT HAPPEN****
+            urlConnection.connect();
+            InputStream in = urlConnection.getInputStream();
             InputStreamReader reader = new InputStreamReader(in);
             BufferedReader br = new BufferedReader(reader);
             StringBuffer result = new StringBuffer();
 
-            System.out.println("Input stream and buffer established");
+
             // Reading in the JSON results from the API
             String line;
             while ((line = br.readLine()) != null) {
