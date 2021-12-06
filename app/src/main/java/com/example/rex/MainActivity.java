@@ -12,11 +12,18 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-    String queryType = "music"; //defaults
+    String queryType = "music"; //default api call values
     int queryLimit = 20;
     int queryInfo = 1;
+    List<String> watchLaterMusic; //favourites will be added to their respective category list
+    List<String> watchLaterMovies;
+    List<String> watchLaterShows;
+    List<String> currentWatchLater; //on tab change, set this to the appropriate list for displaying
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
      * query type while adjusting the button styles and text area
      * */
     public void selectMusic(View view){
-        //set query type
+        //set query type and set reference to favourite list
         queryType="music";
+        currentWatchLater = watchLaterMusic;
 
         //clear search area
         EditText textBox = (EditText) findViewById(R.id.searchBox);
@@ -46,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
      * query type while adjusting the button styles and text area
      * */
     public void selectMovies(View view){
-        //set query type
+        //set query type and set reference to favourite list
         queryType="movie";
+        currentWatchLater = watchLaterMovies;
 
         //clear search area
         EditText textBox = (EditText) findViewById(R.id.searchBox);
@@ -63,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
      * query type while adjusting the button styles and text area
      * */
     public void selectShows(View view){
-        //set query type
+        //set query type and set reference to favourite list
         queryType="show";
+        currentWatchLater = watchLaterShows;
 
         //clear search area
         EditText textBox = (EditText) findViewById(R.id.searchBox);
@@ -74,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.musicButton).setBackgroundColor(Color.parseColor("#9B9B9B"));
         findViewById(R.id.moviesButton).setBackgroundColor(Color.parseColor("#9B9B9B"));
         findViewById(R.id.showsButton).setBackgroundColor(Color.parseColor("#70FFA5"));
+    }
+
+    public void openWatchLater(View view){
+        //popup
     }
 
     /** doSearch executes when the search button is pressed. It takes the user input and uses

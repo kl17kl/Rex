@@ -42,6 +42,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/LinearLayout02"
         android:background="@drawable/customborder"
         app:layout_constraintTop_toBottomOf="@id/LinearLayout01"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,11 +52,22 @@
         android:orientation="horizontal"
         tools:context=".MainActivity">
 
+        <Button
+            android:id="@+id/watchLaterButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            app:icon="@android:drawable/btn_star"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="#FFFFFF"
+            android:onClick="openWatchLater"
+            ></Button>
     <EditText
         android:id="@+id/searchBox"
-        android:backgroundTint="@color/white"
+        android:background="@null"
         android:hint="Search"
-        android:layout_width="265dp"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:inputType="text"
         android:maxLines="1"
@@ -64,11 +76,17 @@
         android:text=""/>
         <Button
             android:id="@+id/searchButton"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            app:icon="@android:drawable/ic_menu_search"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:backgroundTint="#9B9B9B"
+            android:backgroundTint="#FFFFFF"
             android:onClick="doSearch"
-            android:text="Search"></Button>
+            ></Button>
     </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
