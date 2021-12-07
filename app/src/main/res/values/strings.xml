@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Rex</string>
+    <!-- API parameters: -->
+    <string name="music">music</string>
+    <string name="movies">movies</string>
+    <string name="shows">shows</string>
+
+    <!-- Titles -->
+    <string name="music_upper">Music</string>
+    <string name="artists_upper">Artists</string>
+    <string name="movies_upper">Movies</string>
+    <string name="shows_upper">Shows</string>
+
+    <string name="artists">artists</string>
+    <string name="musical_artist">musical artist</string>
+    <string name="movie">movie</string>
+    <string name="show">TV show</string>
+
+    <string name="explore_copy1">Start by searching for the name of a</string>
+    <string name="explore_copy2">you already like!</string>
+    <string name="results_copy">Top artists we think you might also like.</string>
+    <string name="explore_artists">Explore Artists</string>
+    <string name="default_music_copy">Start by searching for the name of a musical artist you already like!</string>
+    <string name="search_copy">Search for a</string>
+    <string name="default_search_copy">Search for a musical artist…</string>
 </resources>

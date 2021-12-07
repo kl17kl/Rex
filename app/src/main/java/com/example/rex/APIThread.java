@@ -47,7 +47,6 @@ public class APIThread extends Thread {
             BufferedReader br = new BufferedReader(reader);
             StringBuffer result = new StringBuffer();
 
-
             // Reading in the JSON results from the API
             String line;
             while ((line = br.readLine()) != null) {
