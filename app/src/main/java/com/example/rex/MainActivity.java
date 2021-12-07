@@ -120,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
         // Display the appropriate data to the screen
         exploreTitle.setText("Explore "+title);
         exploreCopy.setText(getString(R.string.explore_copy1) + " " + text + " " + getString(R.string.explore_copy2));
-        searchBox.setText(getString(R.string.search_copy) + " " + text + "…");
+        searchBox.setText("");
+        searchBox.setHint(getString(R.string.search_copy) + " " + text + "…");
     }
 
     /**
