@@ -12,4 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""/>
+
+    <ListView
+        android:id="@+id/favouritesListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
 </LinearLayout>

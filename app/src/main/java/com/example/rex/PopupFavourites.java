@@ -3,22 +3,26 @@ package com.example.rex;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * This class represents the Popup activity for the user's watchlist...
  */
 
-public class Popup extends Activity {
+public class PopupFavourites extends Activity {
 
     String queryType = MainActivity.queryType;
     TextView popupTitle;
+    ListView favouritesListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Set-up saved instances, layout, and widgets
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup_view);
+        setContentView(R.layout.popup_favourites);
         initWidgets();
 
         // Define pop-up screen dimensions
@@ -27,7 +31,7 @@ public class Popup extends Activity {
         popupTitle.setText(queryType);
 
         // Populate the listView with watchlist items of the given type
-        setWatchListAdapter();
+        setFavouritesAdapter();
     }
 
     /**
@@ -44,13 +48,17 @@ public class Popup extends Activity {
      */
     private void initWidgets() {
         popupTitle = findViewById(R.id.popupTitle);
+        favouritesListView = findViewById(R.id.favouritesListView);
     }
 
     /**
-     * This method sets up the MeetingAdapter to populate the listView with all the meetings for
-     * the selected date.
+     * This method sets up the FavouritesAdapter to populate the listView with all the
+     * user's favourite artists/movies/shows from their watchlist of a specified type.
      */
-    private void setWatchListAdapter() {
+    private void setFavouritesAdapter() {
+        ArrayList<Result> currentFavourites = MainActivity.currentFavourites;
+        FavouritesAdapter favouritesAdapter = new FavouritesAdapter(this, currentFavourites);
+        favouritesListView.setAdapter(favouritesAdapter);
     }
 
 }

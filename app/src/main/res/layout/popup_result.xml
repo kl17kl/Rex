@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@android:drawable/picture_frame">
+
+    <TextView
+        android:id="@+id/popupTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/popupDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="20"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/popupYoutube"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/purple_inactive"
+        android:text="I am a youtube preview"/>
+
+    <Button
+        android:id="@+id/popupFavourite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="addToFavourites"
+        android:text="Add to favourites"/>
+
+    <Button
+        android:id="@+id/popupSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="doSearch"
+        android:text="See more like this"/>
+
+
+</LinearLayout>

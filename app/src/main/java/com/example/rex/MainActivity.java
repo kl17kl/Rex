@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the MainActivity class that gets called upon start-up. Here, the user is presented with
@@ -39,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
     // Returned JSON results from API call
     JSONArray infoArray, resultsArray;
 
-    // Categorical favourites lists (currentWatchLater = current favourites list view)
-    List<String> watchLaterMusic, watchLaterMovies, watchLaterShows, currentWatchLater;
+    // Categorical favourites lists
+    static ArrayList<Result> favouriteMusic = new ArrayList<>(),
+            favouriteMovies = new ArrayList<>(), favouriteShows = new ArrayList<>(),
+            currentFavourites = new ArrayList<>();
 
     // The widgets on the activity_main layout
-    EditText searchBox;
+    static EditText searchBox;
     TextView exploreTitle, exploreCopy, listViewTitle, listViewCopy;
     ListView resultsListView;
     Button musicButton, moviesButton, showsButton;
@@ -59,11 +60,14 @@ public class MainActivity extends AppCompatActivity {
         resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Perform new API call on selected item
+                // Get the selected result item
                 Result selected = (Result) adapterView.getItemAtPosition(i);
-                searchBox.setText(selected.getName());
-                doSearch(searchBox);
-                searchBox.setText("");
+
+                // Open popup with selected item details
+                Intent intent = new Intent(MainActivity.this, PopupResult.class);
+                intent.putExtra("selected", selected.getName());
+                startActivity(intent);
+
             }
         });
     }
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         ResultsAdapter resultsAdapter = new ResultsAdapter(this, returnedResults);
         resultsListView.setAdapter(resultsAdapter);
         justifyListViewHeight(resultsListView);
-        System.out.println("Adapter has been set");
     }
 
     /**
@@ -109,15 +112,15 @@ public class MainActivity extends AppCompatActivity {
 
         switch(view.getId()) {
             case R.id.musicButton:
-                setCategory(getString(R.string.music), watchLaterMusic, musicButton,
+                setCategory(getString(R.string.music), favouriteMusic, musicButton,
                         getString(R.string.artists_upper), getString(R.string.musical_artist));
                 break;
             case R.id.moviesButton:
-                setCategory(getString(R.string.movies), watchLaterMovies, moviesButton,
+                setCategory(getString(R.string.movies), favouriteMovies, moviesButton,
                         getString(R.string.movies_upper), getString(R.string.movie));
                 break;
             case R.id.showsButton:
-                setCategory(getString(R.string.shows), watchLaterShows, showsButton,
+                setCategory(getString(R.string.shows), favouriteShows, showsButton,
                         getString(R.string.shows_upper), getString(R.string.show));
                 break;
             default:
@@ -162,12 +165,12 @@ public class MainActivity extends AppCompatActivity {
      * @param text              copy under title: musical artist, movie, or TV show
      */
     @SuppressLint("SetTextI18n")
-    private void setCategory(String category, List<String> favouritesList, Button button,
+    private void setCategory(String category, ArrayList<Result> favouritesList, Button button,
                              String title, String text) {
         queryType = category;                 // Set API "Type" parameter
         typeTitle = title;
         typeText = text;
-        currentWatchLater = favouritesList;   // Set the current favourites list
+        currentFavourites = favouritesList;   // Set the current favourites list
         button.setBackgroundColor(getColor(R.color.purple_active)); // Set the tab to active
         button.setTextColor(getColor(R.color.white));
 
@@ -201,8 +204,7 @@ public class MainActivity extends AppCompatActivity {
         // Save the API data into JSONArrays and update resultsList
         infoArray = thread.getInfo();
         resultsArray = thread.getResults();
-        JSONToArrayList();
-        System.out.println("results array: "+resultsArray.toString());
+        Result.resultsList = JSONToArrayList(resultsArray);
 
         // Update the screen
         setResultsAdapter();
@@ -218,21 +220,22 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method updates and saves the returned results from the API call to the resultList in
      * the Result class. To do so, it first converts the JSON object to an ArrayList object.
+     * @param array the JSONArray to parse through
      */
-    private void JSONToArrayList() {
+    public static ArrayList<Result> JSONToArrayList(JSONArray array) {
         ArrayList<Result> returnList = new ArrayList<>();
 
-        if (resultsArray != null) {
-            for (int i=0;i<resultsArray.length();i++){
-                returnList.add(new Result(getKeyValue(resultsArray, "Name", i),
-                        getKeyValue(resultsArray, "Type", i),
-                        getKeyValue(resultsArray, "wTeaser", i),
-                        getKeyValue(resultsArray, "wUrl", i),
-                        getKeyValue(resultsArray, "yUrl", i),
-                        getKeyValue(resultsArray, "yID", i)));
+        if (array != null) {
+            for (int i=0;i<array.length();i++){
+                returnList.add(new Result(getKeyValue(array, "Name", i),
+                        getKeyValue(array, "Type", i),
+                        getKeyValue(array, "wTeaser", i),
+                        getKeyValue(array, "wUrl", i),
+                        getKeyValue(array, "yUrl", i),
+                        getKeyValue(array, "yID", i)));
             }
         }
-        Result.resultsList = returnList;
+        return returnList;
     }
 
     /**
@@ -242,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
      * @param position  the position in the array to search within
      * @return  the value at the specified key and position
      */
-    private String getKeyValue(JSONArray array, String key, Integer position) {
+    private static String getKeyValue(JSONArray array, String key, Integer position) {
         String value = null;
         try {
             for(int i=0; i<array.length(); i++) {
@@ -283,14 +286,22 @@ public class MainActivity extends AppCompatActivity {
         listView.requestLayout();
     }
 
-
     /**
-     * This method opens a popup with the user's watchlist of a given type (Music, Movies, Shows).
+     * This method opens a popup with the user's favourites of a given type (Music, Movies, Shows).
      * @param view the View
      */
-    public void openWatchLater(View view){
+    public void openFavourites(View view){
         // Start a new popup activity
-        startActivity(new Intent(MainActivity.this, Popup.class));
+        startActivity(new Intent(MainActivity.this, PopupFavourites.class));
     }
 
+    /**
+     * When the user wants to see recommendations for their selected result, a new search will
+     * be performed on that selected result.
+     */
+/*    @Override
+    protected void onResume() {
+        super.onResume();
+        doSearch(searchBox);
+    }*/
 }

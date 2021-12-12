@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Popup"
+        <activity android:name=".PopupFavourites"
+            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity android:name=".PopupResult"
             android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
