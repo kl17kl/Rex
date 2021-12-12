@@ -12,23 +12,35 @@ import java.util.Date;
 
 public class Result {
 
-    private String name, description;
+    private String name, type, description, wikiURL, youtubeURL, youtubeID;
+    public static ArrayList<Result> resultsList = new ArrayList<>();
 
-    public Result(String name, String description) {
-        this.name = name;
-        this.description = description;
-        // wiki url and youtube url?
+    public Result(String n, String t, String d, String wURL, String yURL, String yID) {
+        this.name = n;
+        this.type = t;
+        this.description = d;
+        this.wikiURL = wURL;
+        this.youtubeURL = yURL;
+        this.youtubeID = yID;
     }
 
-    /** Getter and setter methods for Result data. */
+    /** Getter methods for Result data. */
 
     public String getName() {
         return this.name;
     }
 
+    public String getType() { return this.type; }
+
     public String getDescription() {
         return this.description;
     }
+
+    public String getWikiURL() { return this.wikiURL; }
+
+    public String getYoutubeURL() { return this.youtubeURL; }
+
+    public String getYoutubeID() { return this.youtubeID; }
 
 }
 

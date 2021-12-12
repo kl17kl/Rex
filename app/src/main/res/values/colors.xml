@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_active">#895DAF</color>
-    <color name="purple_inactive">#EAE5EF</color>
-    <color name="purple_border">#CBBBDA</color>
+    <color name="purple_active">#8F5CE1</color>
+    <color name="purple_inactive">#E9E5EF</color>
+    <color name="purple_border">#C9BBDA</color>
     <color name="grey_light">#ECECEC</color>
     <color name="grey_medium">#D5D5D5</color>
     <color name="grey_dark">#939393</color>

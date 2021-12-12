@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="favouriteButton" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="tint">@color/white</item>
+        <item name="backgroundTint">@color/purple_active</item>
+        <item name="rippleColor">#C67DFA</item>
+    </style>
+
+    <!-- Popup View Styles -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+    <style name="AppTheme.CustomTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+</resources>

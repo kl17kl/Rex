@@ -18,9 +18,10 @@
 
     <string name="explore_copy1">Start by searching for the name of a</string>
     <string name="explore_copy2">you already like!</string>
-    <string name="results_copy">Top artists we think you might also like.</string>
+    <string name="results_copy">we think you might also like.</string>
     <string name="explore_artists">Explore Artists</string>
     <string name="default_music_copy">Start by searching for the name of a musical artist you already like!</string>
     <string name="search_copy">Search for a</string>
     <string name="default_search_copy">Search for a musical artist…</string>
+    <string name="watchlist">WatchList</string>
 </resources>
