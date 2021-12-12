@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String typeText = "musical artist";
     int queryLimit = 10;         // Max results returned
     int queryInfo = 1;          // 1 = Display additional info
+    static boolean newSearch = false;
 
     // Returned JSON results from API call
     JSONArray infoArray, resultsArray;
@@ -299,9 +300,11 @@ public class MainActivity extends AppCompatActivity {
      * When the user wants to see recommendations for their selected result, a new search will
      * be performed on that selected result.
      */
-/*    @Override
+    @Override
     protected void onResume() {
         super.onResume();
-        doSearch(searchBox);
-    }*/
+        if (newSearch) {
+            doSearch(searchBox);
+        }
+    }
 }

@@ -84,6 +84,7 @@ public class PopupResult extends Activity {
      */
     public void doSearch(View view) {
         MainActivity.searchBox.setText(result);
+        MainActivity.newSearch = true;
         finish();
     }
 
