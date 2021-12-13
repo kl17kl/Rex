@@ -11,21 +11,24 @@
         android:id="@+id/popupTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""/>
-
+        android:textStyle="bold"
+        android:text="">
+    </TextView>
     <TextView
         android:id="@+id/popupDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="20"
-        android:text=""/>
+        android:clickable="true"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:textColorLink="@color/purple_border"
+        android:text="">
+    </TextView>
+        <WebView
+            android:id="@+id/popupYoutube"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
 
-    <TextView
-        android:id="@+id/popupYoutube"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/purple_inactive"
-        android:text="I am a youtube preview"/>
 
     <Button
         android:id="@+id/popupFavourite"

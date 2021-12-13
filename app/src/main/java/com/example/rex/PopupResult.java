@@ -2,8 +2,14 @@ package com.example.rex;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,7 +25,8 @@ public class PopupResult extends Activity {
     String queryType = MainActivity.queryType;
     String result;
     Result selectedResult;
-    TextView popupTitle, popupDescription, popupYoutube;
+    TextView popupTitle, popupDescription;
+    WebView popupYoutube;
     Button popupFavourite, popupSearch;
 
     @Override
@@ -44,8 +51,11 @@ public class PopupResult extends Activity {
         selectedResult = MainActivity.JSONToArrayList(thread.getInfo()).get(0);
 
         // Display result details
-        popupTitle.setText(selectedResult.getName());
-        popupDescription.setText(selectedResult.getDescription());
+        popupTitle.setText(selectedResult.getName()+"\n");
+        Spanned link = Html.fromHtml(selectedResult.getWikiURL());
+        popupDescription.setText(selectedResult.getDescription().substring(0,150)+"..."+"\n"+ link); //set length of description text via substring
+        popupDescription.setMovementMethod(LinkMovementMethod.getInstance());
+        showVid(selectedResult.getYoutubeID());
     }
 
     /**
@@ -54,7 +64,7 @@ public class PopupResult extends Activity {
     private void initDimensions() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        getWindow().setLayout((int)((dm.widthPixels)*0.7),(int)((dm.heightPixels)*0.7));
+        getWindow().setLayout((int)((dm.widthPixels)*0.8),(int)((dm.heightPixels)*0.8));
     }
 
     /**
@@ -67,7 +77,28 @@ public class PopupResult extends Activity {
         popupFavourite = findViewById(R.id.popupFavourite);
         popupSearch = findViewById(R.id.popupSearch);
     }
+    /**
+     * This method embeds a youtube video in the created web view
+     *
+     * @param videoID the ID of the youtube video to embed
+     */
 
+    private void showVid(String videoID) {
+            WebView youtubeWebView = (WebView) findViewById(R.id.popupYoutube);
+            youtubeWebView.setWebViewClient(new
+            WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading (WebView view, String url){
+                    return false;
+                }
+            });
+            WebSettings webSettings = youtubeWebView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setNeedInitialFocus(false);
+            webSettings.setUseWideViewPort(true);
+            youtubeWebView.loadUrl("https://www.youtube.com/embed/"+videoID);
+    }
 
     /**
      * This method adds the displayed result to the user's appropriate favourites list.
