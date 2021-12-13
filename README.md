@@ -40,6 +40,22 @@ We plan to manipulate the API’s recommendation responses to pull a handful of 
 Documentation: [TasteDive API Documentation](https://tastedive-api-documentation.readthedocs.io/en/latest/index.html)
 
 ## Design:
+### Final UI Designs:
+From left to right:
+- Screen 1: Explore Artists main page - user can search for an artist they're familiar with
+- Screen 2: User searches for an artist and can see recommendations based of their search
+- Screen 3: User clicks on a recommendation and sees a popup containing more information of that recommendation
+- Screen 4: User saves the recommendation to the "Save for later" list
+- Screen 5: The user can see their "Save for later" list for the Musical Artist type
+- Screen 6: The user can remove any item from their "Save for later" list
+- 
+![1_exploreartists](https://user-images.githubusercontent.com/31972297/145902573-e59f841e-dd3e-46bc-a7fe-005b02f6f7e1.png)
+![2_seesimilar](https://user-images.githubusercontent.com/31972297/145902575-4029d49a-d5b2-4739-8366-e9752f9aeee1.png)
+![3_result](https://user-images.githubusercontent.com/31972297/145902577-49fb3b75-752b-4faa-bb2d-b30dd5dc43c8.png)
+![4_saved](https://user-images.githubusercontent.com/31972297/145902578-7a97b217-2fdf-40cf-a04d-1bc0c2ca8f70.png)
+![5_favouriteslist](https://user-images.githubusercontent.com/31972297/145902583-8e254ea4-9e10-4ff0-8788-ce7764cccadd.png)
+![6_remove](https://user-images.githubusercontent.com/31972297/145902584-efb19b39-7a8f-401c-8c68-64c7e2856760.png)
+
 ### UI Mockups:
 From left to right:
 - Screen1_ExploreMenu
