@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -215,25 +217,31 @@ public class MainActivity extends AppCompatActivity {
         // Get the search query
         String input = searchBox.getText().toString();
 
-        // Start a thread and wait until it's complete to pull the API data
-        APIThread thread = new APIThread(input, queryType, queryLimit, queryInfo);
-        thread.start();
-        while (!thread.isComplete()) {}
+        if (input.equals("")) {
+            Toast.makeText(getApplicationContext(), "Try typing something into the search bar.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            // Start a thread and wait until it's complete to pull the API data
+            APIThread thread = new APIThread(input, queryType, queryLimit, queryInfo);
+            thread.start();
+            while (!thread.isComplete()) {
+            }
 
-        // Save the API data into JSONArrays and update resultsList
-        infoArray = thread.getInfo();
-        resultsArray = thread.getResults();
-        Result.resultsList = JSONToArrayList(resultsArray);
+            // Save the API data into JSONArrays and update resultsList
+            infoArray = thread.getInfo();
+            resultsArray = thread.getResults();
+            Result.resultsList = JSONToArrayList(resultsArray);
 
-        // Update the screen
-        setResultsAdapter();
-        listViewTitle.setText("Similar "+ typeTitle + " to\n" + input.substring(0,1).toUpperCase() + input.substring(1));
-        listViewCopy.setText("Top " + typeText + "s " + getString(R.string.results_copy));
+            // Update the screen
+            setResultsAdapter();
+            listViewTitle.setText("Similar " + typeTitle + " to\n" + input.substring(0, 1).toUpperCase() + input.substring(1));
+            listViewCopy.setText("Top " + typeText + "s " + getString(R.string.results_copy));
 
-        // If returned results is empty (i.e. if API doesn't recognize search query)
-        ResultsAdapter adapter = new ResultsAdapter(this, Result.resultsList);
-        if (adapter.getCount() == 0)
-            listViewCopy.setText("Sorry, we couldn't find what you were looking for!");
+            // If returned results is empty (i.e. if API doesn't recognize search query)
+            ResultsAdapter adapter = new ResultsAdapter(this, Result.resultsList);
+            if (adapter.getCount() == 0)
+                listViewCopy.setText("Sorry, we couldn't find what you were looking for!");
+        }
     }
 
     /**

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/tab_container"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:padding="10dp">
@@ -99,21 +99,16 @@
                     android:textSize="16sp" />
 
                 <LinearLayout
-                    android:id="@+id/LinearLayout02"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/customborder"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/LinearLayout01"
-                    tools:context=".MainActivity">
+                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/searchBox"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="25dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:backgroundTint="@color/white"
@@ -125,17 +120,15 @@
                         android:textColorHint="@color/grey_medium"
                         android:textSize="18sp" />
 
-                    <Button
-                        android:id="@+id/searchButton"
-                        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.5"
-                        android:backgroundTint="@color/white"
-                        android:onClick="doSearch"
-                        app:icon="@android:drawable/ic_menu_search" />
-
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="doSearch"
+                    android:text="@string/see_more_like_this"/>
+
             </LinearLayout>
 
             <LinearLayout
