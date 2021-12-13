@@ -9,12 +9,20 @@ Rexplore is an application where users can go for quick music, TV show, and movi
 ### App purpose:
 The purpose of the app is very straightforward, to take in a piece of media (music/movie/show) or genre (rap music/horror movie) that the user enjoys, and give back a list of recommendations that fit their taste. It will be the perfect, instant feedback tool for someone looking to find a new song, or quickly jump into an enjoyable new movie. Making use of the TasteDive API, the app will reap all of the benefit of TasteDive’s large database of media information, but it will be processed and presented in the simplest, most digestible way to the end user to optimize their experience.
 
-### Notable Features:
+### Features:
+
 Multiple Category Support - Switch between "music", "movie", and "show" tabs to explore various forms of entertainment
 
-Save For Later List - Save items to a "Save for later" list to keep track of what you wish to see, and have access to this list across all execution of the application
+Simple Recommendation Engine - Upon searching, instantly receive multiple recommendations based on your search query powered by the TasteDive API
 
-Watch Youtube Previews - Search results for all forms of media are presented with teaser videos embedded and ready to watch
+Interact With Results - For each recommendation you receive, click on it to see more information and be presented with further options
+
+Watch Youtube Previews - Recommendation that you select for all forms of media are presented with teaser videos embedded and ready to watch
+
+Cascade Your Search - With any selected recommendation, have the option to "See similar" to perform a new query and find even more related content
+
+Save For Later List - Save recommendations to a "Save for later" list to keep track of what you want to check out, and have access to this list across all executions of the application
+
 
 ### Target audience:
 Our app is targeted at those who live and thrive in the era of fast-paced, on-demand services. The aim is to allow users to quickly find a handful of media recommendations in just a few clicks. Little will be offered in the form of “extra information”, so the app will be the perfect tool for those users of any age looking to get right into  something new.
