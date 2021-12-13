@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textColor="@color/purple_primary"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:text=""/>
 
     <TextView

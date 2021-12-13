@@ -35,8 +35,8 @@ public class PopupFavourites extends Activity {
 
         // Define the type of favourites list and display to screen
         getFavouritesListType();
-        popupTitle.setText("Your Favourite " + MainActivity.typeTitle);
-        popupCopy.setText("Here are your favourite "+MainActivity.typeText+"s!");
+        popupTitle.setText("Saved " + MainActivity.typeTitle);
+        popupCopy.setText("You've saved these "+MainActivity.typeText+"s for later! Select one to remove it from the list.");
 
         // Populate the listView with watchlist items of the given type
         setFavouritesAdapter();

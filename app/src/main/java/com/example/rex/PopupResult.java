@@ -119,11 +119,11 @@ public class PopupResult extends Activity {
             }
         }
         if(exists){
-            Toast.makeText(getApplicationContext(),"Already added to watch later.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Already saved to list.",Toast.LENGTH_SHORT).show();
         }else{
                 MainActivity.allFavourites.add(selectedResult);
                 MainActivity.saveToInternalStorage(this, "favList","favKey");
-                Toast.makeText(getApplicationContext(),"Added to watch later!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Saved to list!",Toast.LENGTH_SHORT).show();
             }
     }
 

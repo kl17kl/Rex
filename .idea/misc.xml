@@ -4,20 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jmasc/OneDrive/Documents/BROCK U/YEAR5/mobile/Rexplore/Rex/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/jmasc/OneDrive/Documents/BROCK U/YEAR5/mobile/Rexplore/Rex/app/src/main/res/layout/popup_favourites.xml" value="0.1" />
+        <entry key="..\:/Users/jmasc/OneDrive/Documents/BROCK U/YEAR5/mobile/Rexplore/Rex/app/src/main/res/layout/popup_result.xml" value="0.1" />
+        <entry key="..\:/Users/jmasc/OneDrive/Documents/BROCK U/YEAR5/mobile/Rexplore/Rex/app/src/main/res/layout/result_item.xml" value="0.1796875" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/drawable/customborder.xml" value="0.1" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/drawable/favorite_27.xml" value="0.15208333333333332" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.15208333333333332" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/drawable/list_item_border.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/drawable/tab_container.xml" value="0.17604166666666668" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout-v28/result_item.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/activity_main.xml" value="0.13333333333333333" />
-        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/favourite_item.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/popup_favourites.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/popup_remove.xml" value="0.22" />
-        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/popup_result.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/popup_view.xml" value="0.1" />
         <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/result_item.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/katie/AndroidStudioProjects/Rex/app/src/main/res/layout/results_item.xml" value="0.15989583333333332" />
       </map>
     </option>
   </component>

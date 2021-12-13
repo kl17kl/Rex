@@ -41,7 +41,7 @@ public class PopupRemove extends Activity {
 
         // Initialize warning message (to remove an item)
         TextView warningMessage = findViewById(R.id.warningMessage);
-        warningMessage.setText("Are you sure you want to remove "+result+" from your favourites?");
+        warningMessage.setText("Are you sure you want to remove "+result+"?");
     }
 
     /**
