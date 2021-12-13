@@ -32,11 +32,11 @@ public class FavouritesAdapter extends ArrayAdapter<Result>{
 
         // Initialize widgets
         TextView favouriteItemTitle = convertView.findViewById(R.id.favouriteItemTitle);
-        TextView favouriteItemDesc = convertView.findViewById(R.id.favouriteItemDesc);
+        TextView favouriteItemType = convertView.findViewById(R.id.favouriteItemType);
 
         // Display the item's name and description
         favouriteItemTitle.setText(result.getName());
-        favouriteItemDesc.setText(result.getDescription());
+        favouriteItemType.setText(result.getType());
 
         return convertView;
     }

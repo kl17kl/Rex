@@ -34,11 +34,11 @@ public class ResultsAdapter extends ArrayAdapter<Result>{
 
         // Initialize widgets
         TextView resultItemTitle = convertView.findViewById(R.id.resultItemTitle);
-        TextView resultItemDesc = convertView.findViewById(R.id.resultItemDesc);
+        TextView resultItemType = convertView.findViewById(R.id.resultItemType);
 
         // Display the item's name and description
         resultItemTitle.setText(result.getName());
-        resultItemDesc.setText(result.getDescription());
+        resultItemType.setText(result.getType());
 
         return convertView;
     }
