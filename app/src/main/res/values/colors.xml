@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_active">#8F5CE1</color>
+    <color name="purple_primary">#633BD1</color>
+    <color name="purple_secondary">#BFA4EA</color>
+    <color name="purple_fab">#AD6AD1</color>
     <color name="purple_inactive">#E9E5EF</color>
     <color name="purple_border">#C9BBDA</color>
     <color name="grey_light">#ECECEC</color>

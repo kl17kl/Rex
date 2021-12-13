@@ -76,10 +76,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/exploreTitle"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/explore_artists"
                     android:textColor="@color/black"
-                    android:textSize="40sp" />
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/exploreCopy"
@@ -108,7 +108,7 @@
                     <EditText
                         android:id="@+id/searchBox"
                         android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:backgroundTint="@color/white"
@@ -117,7 +117,7 @@
                         android:maxLines="1"
                         android:text=""
                         android:textColor="@color/black"
-                        android:textColorHint="@color/grey_medium"
+                        android:textColorHint="@color/grey_dark"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -125,9 +125,13 @@
                 <Button
                     android:id="@+id/searchButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="58dp"
                     android:onClick="doSearch"
-                    android:text="@string/see_more_like_this"/>
+                    android:text="@string/see_more_like_this"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/purple_primary"/>
 
             </LinearLayout>
 
@@ -135,7 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -145,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="35sp" />
+                    android:textSize="30sp"/>
 
                 <TextView
                     android:id="@+id/listViewCopy"
@@ -161,7 +166,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="10.0sp"/>
 
                 <View
                     android:layout_width="match_parent"

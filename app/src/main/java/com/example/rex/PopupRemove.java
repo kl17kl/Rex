@@ -50,7 +50,7 @@ public class PopupRemove extends Activity {
     private void initDimensions() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        getWindow().setLayout((int)((dm.widthPixels)*0.8),(int)((dm.heightPixels)*0.3));
+        getWindow().setLayout((int)((dm.widthPixels)*0.8),(int)((dm.heightPixels)*0.4));
     }
 
     /**

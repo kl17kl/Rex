@@ -4,36 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="25dp"
     android:background="@android:drawable/picture_frame">
 
     <TextView
         android:id="@+id/warningMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:textSize="16sp"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text=""/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
             android:text="@string/remove"
-            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/purple_primary"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="16sp"
             android:onClick="removeFromFavourites"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
             android:text="@string/cancel"
-            android:layout_weight="1"
+            android:backgroundTint="@color/purple_inactive"
+            android:textColor="@color/purple_primary"
+            android:textAllCaps="false"
+            android:textSize="16sp"
             android:onClick="cancel"/>
 
     </LinearLayout>

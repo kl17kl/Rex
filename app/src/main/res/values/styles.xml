@@ -2,8 +2,8 @@
 <resources>
     <style name="favouriteButton" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="tint">@color/white</item>
-        <item name="backgroundTint">@color/purple_active</item>
-        <item name="rippleColor">#C67DFA</item>
+        <item name="backgroundTint">@color/purple_fab</item>
+        <item name="rippleColor">#D78EFF</item>
     </style>
 
     <!-- Popup View Styles -->

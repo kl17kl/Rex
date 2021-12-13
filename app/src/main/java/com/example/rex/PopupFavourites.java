@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class PopupFavourites extends Activity {
 
-    String queryType = MainActivity.queryType;
     TextView popupTitle, popupCopy;
     ListView favouritesListView;
     ArrayList<Result> currentFavourites = new ArrayList<>();
@@ -36,7 +35,7 @@ public class PopupFavourites extends Activity {
 
         // Define the type of favourites list and display to screen
         getFavouritesListType();
-        popupTitle.setText("Favourite " + MainActivity.typeTitle);
+        popupTitle.setText("Your Favourite " + MainActivity.typeTitle);
         popupCopy.setText("Here are your favourite "+MainActivity.typeText+"s!");
 
         // Populate the listView with watchlist items of the given type
@@ -79,7 +78,7 @@ public class PopupFavourites extends Activity {
     private void initDimensions() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        getWindow().setLayout((int)((dm.widthPixels)*0.7),(int)((dm.heightPixels)*0.7));
+        getWindow().setLayout((int)((dm.widthPixels)*0.8),(int)((dm.heightPixels)*0.8));
     }
 
     /**

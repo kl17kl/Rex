@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="25dp"
     android:background="@android:drawable/picture_frame">
 
-    <TextView
-        android:id="@+id/popupTitle"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="">
-    </TextView>
-    <TextView
-        android:id="@+id/popupDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:autoLink="all"
-        android:linksClickable="true"
-        android:textColorLink="@color/purple_border"
-        android:text="">
-    </TextView>
-        <WebView
-            android:id="@+id/popupYoutube"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="WebViewLayout">
 
+            <TextView
+                android:id="@+id/popupTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/purple_primary"
+                android:textSize="30sp"
+                android:layout_marginTop="5dp"
+                android:text=""/>
 
-    <Button
-        android:id="@+id/popupFavourite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="addToFavourites"
-        android:text="Add to favourites"/>
+            <TextView
+                android:id="@+id/popupDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp"
+                android:clickable="true"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:textColorLink="@color/purple_active"
+                android:text=""/>
 
-    <Button
-        android:id="@+id/popupSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="doSearch"
-        android:text="See more like this"/>
+            <WebView
+                android:id="@+id/popupYoutube"
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_height="200dp"/>
 
+            <Button
+                android:id="@+id/popupSearch"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="20dp"
+                android:onClick="doSearch"
+                android:backgroundTint="@color/purple_primary"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="@string/see_more_like_this"/>
 
+            <Button
+                android:id="@+id/popupFavourite"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginBottom="5dp"
+                android:onClick="addToFavourites"
+                android:backgroundTint="@color/purple_inactive"
+                android:textAllCaps="false"
+                android:textColor="@color/purple_primary"
+                android:textSize="16sp"
+                android:text="@string/add_to_favourites"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

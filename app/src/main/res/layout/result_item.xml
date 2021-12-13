@@ -6,14 +6,15 @@
     android:orientation="vertical"
     android:background="@drawable/list_item_border"
     android:padding="20dp"
-    android:layout_margin="20dp">
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
 
     <TextView
         android:id="@+id/resultItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="@color/purple_primary"
         android:text=""/>
 
     <TextView
@@ -22,8 +23,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@color/grey_dark"
-        android:maxLength="50"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:text=""/>
 
 </LinearLayout>

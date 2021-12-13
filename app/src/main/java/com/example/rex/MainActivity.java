@@ -299,7 +299,8 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter adapter = listView.getAdapter();
         if (adapter == null) return;
         int totalHeight = 0;
-        int buffer = 40;
+        int buffer = 0;
+        //int buffer = 40;
         for (int i = 0; i < adapter.getCount(); i++) {
             View mView = adapter.getView(i, null, listView);
             mView.measure(

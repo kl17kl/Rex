@@ -2,6 +2,7 @@ package com.example.rex;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class ResultsAdapter extends ArrayAdapter<Result>{
         super(context, 0, results);
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -38,7 +40,15 @@ public class ResultsAdapter extends ArrayAdapter<Result>{
 
         // Display the item's name and description
         resultItemTitle.setText(result.getName());
-        resultItemType.setText(result.getType());
+        resultItemTitle.setPaintFlags(resultItemTitle.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        String type = result.getType();
+        if (type.equals("music"))
+            resultItemType.setText("Musical Artist");
+        else if (type.equals("movie"))
+            resultItemType.setText("Movie");
+        else if (type.equals("show"))
+            resultItemType.setText("TV show");
 
         return convertView;
     }
