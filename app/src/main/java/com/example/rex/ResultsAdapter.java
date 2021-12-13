@@ -16,7 +16,12 @@ import java.util.List;
  * This class acts as an Adapter for the Results listView display. When the user searches for an
  * artist/movie/show, its recommendation results will get returned from an API call. This adapter
  * gets the listView and prints out each Result (recommendation) of the search query with its name
- * and description.
+ * and type (musical artist, movie, TV show).
+ *
+ * @see Result
+ * @see MainActivity
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
  */
 
 public class ResultsAdapter extends ArrayAdapter<Result>{

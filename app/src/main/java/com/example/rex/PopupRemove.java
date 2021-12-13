@@ -3,22 +3,24 @@ package com.example.rex;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
- * This class represents the Popup activity for the selected result (recommendation) item...
+ * This class represents the Popup activity for removing an item from one's Saved list. From the
+ * user's Saved list, if the user chooses to remove an item from their list, they can click on any
+ * desired item, and an instance of this activity will initiate. The purpose of this activity is
+ * to add friction to the user's action by confirming if they'd sure they'd want to remove a
+ * selected item from their list. From here, the user can accept and proceed to remove their item,
+ * or they can cancel and in which case nothing will happen. In both cases, the user will get
+ * redirected back to their Favourites list (the previous screen).
+ *
+ * @see PopupFavourites
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
  */
 
 public class PopupRemove extends Activity {
@@ -28,7 +30,7 @@ public class PopupRemove extends Activity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Set-up saved instances, layout, and widgets
+        // Set-up saved instances and layout
         PopupFavourites.popupRemove = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_remove);
@@ -45,8 +47,7 @@ public class PopupRemove extends Activity {
         warningMessage.setText("Are you sure you want to remove "+result+"?");
     }
 
-    /**
-     * This method assigns the popup screen dimensions.
+    /** This method assigns the popup screen dimensions.
      */
     private void initDimensions() {
         DisplayMetrics dm = new DisplayMetrics();
@@ -55,7 +56,7 @@ public class PopupRemove extends Activity {
     }
 
     /**
-     * This method removes the selected favourite from the user's favourites list.
+     * This method removes the selected item from the user's Saved list.
      * @param view the View
      */
     public void removeFromFavourites(View view) {
@@ -70,14 +71,17 @@ public class PopupRemove extends Activity {
     }
 
     /**
-     * This method cancles the remove action and ends the popup activity.
+     * This method cancels the remove action and ends the popup activity.
      * @param view the View
      */
     public void cancel(View view) {
         finish();
     }
 
-
+    /**
+     * This method sets the popupRemove flag from the MainActivity to false, indicating that this
+     * activity will end and the user can now start a new instance of this activity whenever.
+     */
     @Override
     public void onDestroy() {
         PopupFavourites.popupRemove = false;

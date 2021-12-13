@@ -2,29 +2,38 @@ package com.example.rex;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * This class manages the API threads and calls. This class returns JSONArrays of the returned
+ * JSONObject from an API call.
+ *
+ * @see MainActivity
+ * @see PopupResult
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
+ */
+
 public class APIThread extends Thread {
 
-    private String q; //the input query (Drake, Matilda, etc.) - required
-    private String t; //the query type (music, movie, show) - optional
-    private int l; //the return limit (eg. return only 5 results) - optional
-    private int i; //1 for more info, 0 otherwise - optional
+    private String q;   // The input query (Drake, Matilda, etc.) - required
+    private String t;   // The query type (music, movie, show) - optional
+    private int l;      // The return limit (eg. return only 5 results) - optional
+    private int i;      // 1 for more info, 0 otherwise - optional
 
-    private JSONArray info, results;
-    private Boolean complete = false;
+    private JSONArray info, results;    // The returned data in the form of a JSON
+    private Boolean complete = false;   // Flag: if API thread is finished or not
+
     public APIThread (String query, String type, int limit, int info) {
         q = query;
         t = type;
         l = limit;
         i = info;
     }
-
 
     @Override
     public void run() {
@@ -54,24 +63,13 @@ public class APIThread extends Thread {
             }
             br.close();
 
-            System.out.print(result.toString());
-
             // Converting results into a JSONObject
             JSONObject json = new JSONObject(result.toString());
             JSONObject similar = json.getJSONObject("Similar");
-            System.out.println("RESULTS: " + json);
 
             // Saving the JSON's Info and Results data
             info = similar.getJSONArray("Info");
             results = similar.getJSONArray("Results");
-
-            /* Code: printing out values from JSONArray
-            for (int i=0; i<info.length(); i++) {
-                JSONObject rec = info.getJSONObject(i);
-                String name = rec.getString("Name");
-                String type = rec.getString("Type");
-                System.out.println(name+" "+type);
-            }*/
 
             // Wait for main process to kill thread
             complete = true;
@@ -81,14 +79,28 @@ public class APIThread extends Thread {
         }
     }
 
+    /**
+     * This method returns the JSONArray of the Info data from the main JSON object.
+     * This JSONArray contains the search query's data.
+     * @return the JSONArray containing info
+     */
     public JSONArray getInfo() {
         return this.info;
     }
 
+    /**
+     * This method returns the JSONArray of the Results data from the main JSON object.
+     * This JSONArray contains the search query's recommendations/results.
+     * @return the JSONArray containing results
+     */
     public JSONArray getResults() {
         return this.results;
     }
 
+    /**
+     * This method returns it's own complete flag.
+     * @return true if complete
+     */
     public Boolean isComplete() {
         return this.complete;
     }

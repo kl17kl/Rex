@@ -12,9 +12,15 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 /**
- * This class acts as an Adapter for the Favourites listView display. When the user adds an item
- * (artist/movie/show) to their favourites list, and when the user opens up their favourites list,
- * this adapter displays each item with its name, type, and description.
+ * This class acts as an Adapter for the Save for later (or Favourites) listView display. When the
+ * user opens their "Save for later" list, depending on the tab they're in (Music, Movies, Shows),
+ * this adapter gets the listView and prints out each saved item of the proper type with its name,
+ * and type (musical artist, movie, TV show).
+ *
+ * @see Result
+ * @see PopupFavourites
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
  */
 
 public class FavouritesAdapter extends ArrayAdapter<Result>{

@@ -1,13 +1,14 @@
 package com.example.rex;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
- * This class represents a Result (recommendation) object. A Result has a name and description.
- * This class has getter and setter methods to retrieve Result data.
+ * This class represents a Result (recommendation) object. A Result has a name, a description, the
+ * description source, a relevant Youtube video (if applicable), the Youtube's URL, and Youtube ID.
+ * This class has getter methods to retrieve Result data.
+ *
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
  */
 
 public class Result {

@@ -13,7 +13,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * This class represents the Popup activity for the user's watchlist...
+ * This class represents the Popup activity for the user's "Save for later" list. For whichever
+ * tab the user is on (Music, Movies, Shows), the saved items in their list for that particular
+ * category is displayed in this popup. From here, the user can remove items by selecting on the
+ * list item, and from there, an instance of the PopupRemove activity will initiate.
+ *
+ * @see MainActivity
+ * @see Result
+ * @see PopupRemove
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
  */
 
 public class PopupFavourites extends Activity {
@@ -49,7 +58,6 @@ public class PopupFavourites extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Get the selected result item
                 Result selected = (Result) adapterView.getItemAtPosition(i);
-
                 // Open popup with selected item details - only one instance at a time
                 if (!popupRemove) {
                     Intent intent = new Intent(PopupFavourites.this, PopupRemove.class);
@@ -60,8 +68,8 @@ public class PopupFavourites extends Activity {
         });
     }
 
-    /**
-     * This method saves the currentFavourites list with results of the desired type.
+
+    /** This method saves the currentFavourites list with results of the desired type.
      */
     private void getFavouritesListType() {
         int type = 0; //default we assume queryType is "music"
@@ -76,8 +84,7 @@ public class PopupFavourites extends Activity {
         }
     }
 
-    /**
-     * This method assigns the popup screen dimensions.
+    /** This method assigns the popup screen dimensions.
      */
     private void initDimensions() {
         DisplayMetrics dm = new DisplayMetrics();
@@ -85,8 +92,7 @@ public class PopupFavourites extends Activity {
         getWindow().setLayout((int)((dm.widthPixels)*0.8),(int)((dm.heightPixels)*0.8));
     }
 
-    /**
-     * This method initializes the widgets.
+    /** This method initializes the widgets.
      */
     private void initWidgets() {
         popupTitle = findViewById(R.id.popupTitle);
@@ -96,7 +102,7 @@ public class PopupFavourites extends Activity {
 
     /**
      * This method sets up the FavouritesAdapter to populate the listView with all the
-     * user's favourite artists/movies/shows from their watchlist of a specified type.
+     * user's saved artists/movies/shows from their saved list of a specified type.
      */
     private void setFavouritesAdapter() {
         FavouritesAdapter favouritesAdapter = new FavouritesAdapter(this, currentFavourites);
@@ -104,8 +110,8 @@ public class PopupFavourites extends Activity {
     }
 
     /**
-     * When the user removes an item from their favourites list, the favourites list should get
-     * updated on the favourites popup display.
+     * When the user removes an item from their "Save for later" list, the list should get
+     * updated on the Saved list popup display.
      */
     @Override
     protected void onResume() {
@@ -114,6 +120,10 @@ public class PopupFavourites extends Activity {
         setFavouritesAdapter();
     }
 
+    /**
+     * The popUpFavourites flag from the MainActivity is set to false, indicating that this
+     * activity is finishing and that the user can open a new popupFavourites window if they wish.
+     */
     @Override
     public void onDestroy() {
         MainActivity.popUpFavourites = false;

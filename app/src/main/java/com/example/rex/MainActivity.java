@@ -27,25 +27,36 @@ import java.util.ArrayList;
  * the main screen, in which they can select a category (Music, Movies, or Shows) and search for
  * recommended items based on their search. API parameters and calls are managed here.
  *
- * @author Jesse Masciarelli
+ * Here, the user can open their "Save for later" list, in which a popup with their "saved" lists
+ * will display their saved items for a particular category. For this popup, an instance of the
+ * PopupFavourites activity will initiate.
+ *
+ * After looking up a search query, the user can also select any recommendation from the results
+ * list listed on the screen. If the user selects a recommendation result, a popup will display
+ * the result's information (Wikipedia description, link to the Wikipedia source, and a relevant
+ * Youtube video). From here, the user can add that item to their "Save for later" list or they
+ * can perform another search with that item. For this popup, an instance of the PopupResult
+ * activity will initiate
+ *
+ * @see PopupFavourites
+ * @see PopupResult
+ * @author Jesse Masciarelli (6243109)
  * @author Katie Lee (6351696)
  */
+
 public class MainActivity extends AppCompatActivity {
 
-    static String queryType = "music";   // Default type
-    static String typeTitle = "Artists";
-    static String typeText = "musical artist";
-    int queryLimit = 10;         // Max results returned
-    int queryInfo = 1;          // 1 = Display additional info
-    static boolean newSearch = false;
-    static boolean popUpResult = false;
-    static boolean popUpFavourites = false;
+    static String queryType = "music";          // Default type
+    static String typeTitle = "Artists";        // Default type copy for titles
+    static String typeText = "musical artist";  // Default type copy for subtitles/text
+    int queryLimit = 10;                        // Max results returned
+    int queryInfo = 1;                          // 1 = Display additional info
+    static boolean newSearch = false;           // Flag: is this a secondary API call
+    static boolean popUpResult = false;         // Flag: if popupResult instance already exists
+    static boolean popUpFavourites = false;     // Flag: if popupFavourites instance already exists
+    JSONArray infoArray, resultsArray;          // Returned JSON results from API call
 
-    // Returned JSON results from API call
-    JSONArray infoArray, resultsArray;
-
-    // Categorical favourites lists
-    static ArrayList<Result> allFavourites = new ArrayList<>();
+    static ArrayList<Result> allFavourites = new ArrayList<>(); // The user's "Save for later" list
 
     // The widgets on the activity_main layout
     static EditText searchBox;
@@ -65,13 +76,12 @@ public class MainActivity extends AppCompatActivity {
                 "favKey", "Error: Unable to retrieve data from internal storage");
         allFavourites = convertToArrayList(internalData);
 
-        // Onclick listener for listView items (when a user selects a recommendation)
+        // Onclick listener for listView items (when a user selects a recommendation/result)
         resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Get the selected result item
                 Result selected = (Result) adapterView.getItemAtPosition(i);
-
                 // Open popup with selected item details - only allow one instance at a time
                 if (!popUpResult) {
                     Intent intent = new Intent(MainActivity.this, PopupResult.class);
@@ -94,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         String[] favourites = internalData.split("\n");
         for (int i=0; i< favourites.length; i++) {
             String[] values = favourites[i].split("\t");
-
             if (values.length == 6) {
                 Result r = new Result(values[0], values[1], values[2], values[3], values[4], values[5]);
                 favouritesList.add(r);
@@ -114,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
         justifyListViewHeight(resultsListView);
     }
 
-    /**
-     * This method initializes the widgets on the main activity screen.
+    /** This method initializes the widgets on the main activity screen.
      */
     private void initWidgets() {
         searchBox = findViewById(R.id.searchBox);
@@ -133,13 +141,11 @@ public class MainActivity extends AppCompatActivity {
      * This method determines what to do once a user selects a tab (Music, Movies, or Shows).
      * All tab buttons change their display to be inactive, and depending on what tab the user
      * selects, setCategory() gets called to display the appropriate data to the screen.
-     *
      * @param view the View
      */
     @SuppressLint("NonConstantResourceId")
     public void onclickTab(View view) {
         refreshScreen();
-
         switch(view.getId()) {
             case R.id.musicButton:
                 setCategory(getString(R.string.music), musicButton, getString(R.string.artists_upper), getString(R.string.musical_artist));
@@ -155,13 +161,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * This method refreshes the screen by clearing it's recommendation list section.
+    /** This method refreshes the screen by clearing it's recommendation list section.
      */
     private void refreshScreen() {
-        // Reset tab buttons
         setButtonsInactive();
-        // Clear recommendations section
         listViewTitle.setText("");
         listViewCopy.setText("");
         Result.resultsList.clear();
@@ -184,15 +187,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the appropriate data (i.e., text, titles, API parameter, etc.) on the
      * screen to correspond with the user's selected tab category (Music, Movies, or Shows).
-     *
-     * @param category          Music, Movie, or Show
-     * @param button            selected tab button
-     * @param title             title: Explore + Artists, Movies, or Shows
-     * @param text              copy under title: musical artist, movie, or TV show
+     * @param category     Music, Movie, or Show
+     * @param button       Selected tab button
+     * @param title        Artists, Movies, or Shows
+     * @param text         Copy under title: musical artist, movie, or TV show
      */
     @SuppressLint("SetTextI18n")
     private void setCategory(String category, Button button, String title, String text) {
-        queryType = category;                 // Set API "Type" parameter
+        queryType = category;
         typeTitle = title;
         typeText = text;
         button.setBackgroundColor(getColor(R.color.purple_active)); // Set the tab to active
@@ -208,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method executes an API call with the "Query" parameter set as the input from the search
      * bar. The results from the call get returned in the form of a JSONArray.
-     *
      * @param view the View
      */
     @SuppressLint("SetTextI18n")
@@ -219,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the search query
         String input = searchBox.getText().toString();
-
         if (input.equals("")) {
             Toast.makeText(getApplicationContext(), "Try typing something into the search bar.", Toast.LENGTH_SHORT).show();
         }
@@ -227,8 +227,7 @@ public class MainActivity extends AppCompatActivity {
             // Start a thread and wait until it's complete to pull the API data
             APIThread thread = new APIThread(input, queryType, queryLimit, queryInfo);
             thread.start();
-            while (!thread.isComplete()) {
-            }
+            while (!thread.isComplete()) {} // wait for thread to finish
 
             // Save the API data into JSONArrays and update resultsList
             infoArray = thread.getInfo();
@@ -254,7 +253,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public static ArrayList<Result> JSONToArrayList(JSONArray array) {
         ArrayList<Result> returnList = new ArrayList<>();
-
         if (array != null) {
             for (int i=0;i<array.length();i++){
                 returnList.add(new Result(getKeyValue(array, "Name", i),
@@ -270,8 +268,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * This method returns the value at a given key within a JSON array.
-     * @param array the JSONArray
-     * @param key   the key
+     * @param array     the JSONArray
+     * @param key       the key
      * @param position  the position in the array to search within
      * @return  the value at the specified key and position
      */
@@ -302,14 +300,12 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter adapter = listView.getAdapter();
         if (adapter == null) return;
         int totalHeight = 0;
-        int buffer = 0;
-        //int buffer = 40;
         for (int i = 0; i < adapter.getCount(); i++) {
             View mView = adapter.getView(i, null, listView);
             mView.measure(
                     View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                     View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-            totalHeight += mView.getMeasuredHeight() + buffer;
+            totalHeight += mView.getMeasuredHeight();
         }
         ViewGroup.LayoutParams par = listView.getLayoutParams();
         par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
@@ -322,7 +318,6 @@ public class MainActivity extends AppCompatActivity {
      * @param view the View
      */
     public void openFavourites(View view){
-        // Start a new popup activity
         if (!popUpFavourites)
             startActivity(new Intent(MainActivity.this, PopupFavourites.class));
     }

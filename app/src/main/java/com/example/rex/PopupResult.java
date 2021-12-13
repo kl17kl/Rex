@@ -12,15 +12,22 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the Popup activity for the selected result (recommendation) item...
+ * This class represents the Popup activity for the selected result (recommendation) that the user
+ * selected from the MainActivity. Here, the user will be able to see the result's name, a brief
+ * description pulled from Wikipedia, the Wikipedia source, and relevant Youtube video (if
+ * applicable), and two options: to save to their "Save for later" list or to "See more like this".
+ * If the user selects, "See more like this", this activity will close and an API call on the
+ * selected result item will get called.
+ *
+ * @see MainActivity
+ * @see Result
+ * @author Jesse Masciarelli (6243109)
+ * @author Katie Lee (6351696)
  */
 
 public class PopupResult extends Activity {
@@ -57,13 +64,12 @@ public class PopupResult extends Activity {
         // Display result details
         popupTitle.setText(selectedResult.getName()+"\n");
         Spanned link = Html.fromHtml(selectedResult.getWikiURL());
-        popupDescription.setText(selectedResult.getDescription().substring(0,150)+"..."+"\n"+ link); //set length of description text via substring
+        popupDescription.setText(selectedResult.getDescription().substring(0,150)+"..."+"\n"+ link);
         popupDescription.setMovementMethod(LinkMovementMethod.getInstance());
         showVid(selectedResult.getYoutubeID());
     }
 
-    /**
-     * This method assigns the popup screen dimensions.
+    /** This method assigns the popup screen dimensions.
      */
     private void initDimensions() {
         DisplayMetrics dm = new DisplayMetrics();
@@ -71,8 +77,7 @@ public class PopupResult extends Activity {
         getWindow().setLayout((int)((dm.widthPixels)*0.8),(int)((dm.heightPixels)*0.8));
     }
 
-    /**
-     * This method initializes the widgets.
+    /** This method initializes the widgets.
      */
     private void initWidgets() {
         popupTitle = findViewById(R.id.popupTitle);
@@ -81,12 +86,11 @@ public class PopupResult extends Activity {
         popupFavourite = findViewById(R.id.popupFavourite);
         popupSearch = findViewById(R.id.popupSearch);
     }
+
     /**
-     * This method embeds a youtube video in the created web view
-     *
+     * This method embeds a Youtube video in the webView.
      * @param videoID the ID of the youtube video to embed
      */
-
     @SuppressLint("SetJavaScriptEnabled")
     private void showVid(String videoID) {
             WebView youtubeWebView = (WebView) findViewById(R.id.popupYoutube);
@@ -106,13 +110,13 @@ public class PopupResult extends Activity {
     }
 
     /**
-     * This method adds the displayed result to the user's appropriate favourites list.
+     * This method adds the displayed result to the user's appropriate "Save for later" list. The
+     * user is unable to add duplicates to their list.
      * @param view the View
      */
     public void addToFavourites(View view) {
         List<Result> favList = MainActivity.allFavourites;
         Boolean exists = false;
-
         for(Result r: favList) {
             if (r.getName().equals(selectedResult.getName()) && r.getType().equals(selectedResult.getType())) {
                 exists = true;
@@ -138,6 +142,12 @@ public class PopupResult extends Activity {
         finish();
     }
 
+    /**
+     * This method sets the popUpResult flag from the MainActivity to false, indicating that the
+     * user can now open another PopupResult activity window if they'd like to. The Youtube video
+     * also gets destroyed and its cache gets cleared - making it so that the Youtube video will
+     * not continue to play even after this activity has finished.
+     */
     @Override
     public void onDestroy() {
         MainActivity.popUpResult = false;
@@ -147,6 +157,5 @@ public class PopupResult extends Activity {
         popupYoutube.clearCache(true);
         super.onDestroy();
     }
-
 
 }
