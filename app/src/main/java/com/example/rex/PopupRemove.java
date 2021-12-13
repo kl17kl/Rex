@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,7 @@ public class PopupRemove extends Activity {
                 break;
             }
         }
+        Toast.makeText(getApplicationContext(),"Removed from list!",Toast.LENGTH_SHORT).show();
         MainActivity.saveToInternalStorage(this, "favList","favKey");
         finish();
     }
