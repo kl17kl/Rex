@@ -52,6 +52,10 @@ From left to right, top to bottom:
 <img width="800" alt="screens123" src="https://user-images.githubusercontent.com/31972297/145903490-9f6a1853-db4d-443a-a57f-40f3ac103af5.png">
 <img width="800" alt="screens456" src="https://user-images.githubusercontent.com/31972297/145903493-2ef98350-4aa9-45bf-aba0-a24ac07cfbf4.png">
 
+### Rexplore DEMO:
+![demo_part1](https://user-images.githubusercontent.com/31972297/145904647-da3eb550-8545-4b18-968a-b0f8f61b0c34.gif)
+![demo_part2](https://user-images.githubusercontent.com/31972297/145904653-8cff61fa-dac9-4450-8a9b-ae3ce803e2c5.gif)
+
 ### UI Mockups:
 From left to right:
 - Screen1_ExploreMenu
