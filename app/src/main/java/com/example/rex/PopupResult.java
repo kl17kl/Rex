@@ -141,7 +141,12 @@ public class PopupResult extends Activity {
     @Override
     public void onDestroy() {
         MainActivity.popUpResult = false;
+        // destroy video and clear cache
+        popupYoutube.onPause();
+        popupYoutube.loadUrl("");
+        popupYoutube.clearCache(true);
         super.onDestroy();
     }
+
 
 }
