@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     static String queryType = "music";   // Default type
-    String typeTitle = "Artists";
-    String typeText = "musical artist";
+    static String typeTitle = "Artists";
+    static String typeText = "musical artist";
     int queryLimit = 10;         // Max results returned
     int queryInfo = 1;          // 1 = Display additional info
     static boolean newSearch = false;
@@ -40,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
     JSONArray infoArray, resultsArray;
 
     // Categorical favourites lists
-    static ArrayList<Result> favouriteMusic = new ArrayList<>(),
-            favouriteMovies = new ArrayList<>(), favouriteShows = new ArrayList<>(),
-            currentFavourites = new ArrayList<>();
+    static ArrayList<Result> allFavourites = new ArrayList<>();
 
     // The widgets on the activity_main layout
     static EditText searchBox;
@@ -56,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initWidgets();
+
+        // Retrieve user data from internal storage
+        String internalData = retrieveFromInternalStorage(this, "favList",
+                "favKey", "Error: Unable to retrieve data from internal storage");
+        allFavourites = convertToArrayList(internalData);
 
         // Onclick listener for listView items (when a user selects a recommendation)
         resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -71,6 +75,26 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * This method converts the data retrieved from internal storage (String) to an ArrayList
+     * object of type Result.
+     * @param internalData String of user's favouritesList from internal storage
+     * @return ArrayList: favouritesList
+     */
+    private ArrayList<Result> convertToArrayList(String internalData) {
+        ArrayList<Result> favouritesList = new ArrayList<>();
+        String[] favourites = internalData.split("\n");
+        for (int i=0; i< favourites.length; i++) {
+            String[] values = favourites[i].split("\t");
+
+            if (values.length == 6) {
+                Result r = new Result(values[0], values[1], values[2], values[3], values[4], values[5]);
+                favouritesList.add(r);
+            }
+        }
+        return favouritesList;
     }
 
 
@@ -113,16 +137,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch(view.getId()) {
             case R.id.musicButton:
-                setCategory(getString(R.string.music), favouriteMusic, musicButton,
-                        getString(R.string.artists_upper), getString(R.string.musical_artist));
+                setCategory(getString(R.string.music), musicButton, getString(R.string.artists_upper), getString(R.string.musical_artist));
                 break;
             case R.id.moviesButton:
-                setCategory(getString(R.string.movies), favouriteMovies, moviesButton,
-                        getString(R.string.movies_upper), getString(R.string.movie));
+                setCategory(getString(R.string.movies), moviesButton, getString(R.string.movies_upper), getString(R.string.movie));
                 break;
             case R.id.showsButton:
-                setCategory(getString(R.string.shows), favouriteShows, showsButton,
-                        getString(R.string.shows_upper), getString(R.string.show));
+                setCategory(getString(R.string.shows), showsButton, getString(R.string.shows_upper), getString(R.string.show));
                 break;
             default:
                 throw new RuntimeException("_ERROR: Unknown category button ID");
@@ -160,18 +181,15 @@ public class MainActivity extends AppCompatActivity {
      * screen to correspond with the user's selected tab category (Music, Movies, or Shows).
      *
      * @param category          Music, Movie, or Show
-     * @param favouritesList    favourite music/movie/show lists
      * @param button            selected tab button
      * @param title             title: Explore + Artists, Movies, or Shows
      * @param text              copy under title: musical artist, movie, or TV show
      */
     @SuppressLint("SetTextI18n")
-    private void setCategory(String category, ArrayList<Result> favouritesList, Button button,
-                             String title, String text) {
+    private void setCategory(String category, Button button, String title, String text) {
         queryType = category;                 // Set API "Type" parameter
         typeTitle = title;
         typeText = text;
-        currentFavourites = favouritesList;   // Set the current favourites list
         button.setBackgroundColor(getColor(R.color.purple_active)); // Set the tab to active
         button.setTextColor(getColor(R.color.white));
 
@@ -306,5 +324,39 @@ public class MainActivity extends AppCompatActivity {
         if (newSearch) {
             doSearch(searchBox);
         }
+    }
+
+    /**
+     * This method saves all the user's favourites from the favouritesList as a String and saves
+     * it to internal storage with a given preference name and data key.
+     * @param context the application context (this)
+     * @param preferenceName the name to save as to internal storage
+     * @param dataKey the key to assign to the saved content
+     */
+    public static void saveToInternalStorage(Context context, String preferenceName, String dataKey) {
+        StringBuilder sb = new StringBuilder();
+        for (Result result : allFavourites) {
+            sb.append(result.getName()+"\t"+result.getType()+"\t"+result.getDescription()+"\t"
+                    +result.getWikiURL()+"\t"+result.getYoutubeURL()+"\t"+result.getYoutubeID()+"\n");
+        }
+        String userFavouritesList = sb.toString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(dataKey, userFavouritesList);
+        editor.commit();
+    }
+
+    /**
+     * This method retrieves a file from internal using a given preference name and data key. If
+     * there is an error with retrieving the file given default value is returned instead.
+     * @param context the application context (this)
+     * @param preferenceName the name to retrieve from internal storage
+     * @param dataKey the key to confirm and match
+     * @param defaultValue an error message saying the retrieving failed
+     * @return the retrieved String from internal storage
+     */
+    public static String retrieveFromInternalStorage(Context context, String preferenceName, String dataKey, String defaultValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(dataKey, defaultValue);
     }
 }

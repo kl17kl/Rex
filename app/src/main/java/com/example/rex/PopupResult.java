@@ -1,5 +1,6 @@
 package com.example.rex;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
@@ -29,6 +30,7 @@ public class PopupResult extends Activity {
     WebView popupYoutube;
     Button popupFavourite, popupSearch;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Set-up saved instances, layout, and widgets
@@ -83,6 +85,7 @@ public class PopupResult extends Activity {
      * @param videoID the ID of the youtube video to embed
      */
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void showVid(String videoID) {
             WebView youtubeWebView = (WebView) findViewById(R.id.popupYoutube);
             youtubeWebView.setWebViewClient(new
@@ -105,7 +108,8 @@ public class PopupResult extends Activity {
      * @param view the View
      */
     public void addToFavourites(View view) {
-        MainActivity.currentFavourites.add(selectedResult);
+        MainActivity.allFavourites.add(selectedResult);
+        MainActivity.saveToInternalStorage(this, "favList","favKey");
     }
 
     /**
