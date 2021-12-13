@@ -21,7 +21,7 @@ The purpose of the app is very straightforward, to take in a piece of media (mus
 
 **Cascade Your Search:** With any selected recommendation, have the option to "See similar" to perform a new query and find even more related content
 
-**Save For Later List:** Save recommendations to a "Save for later" list to keep track of what you want to check out, and have access to this list across all executions of the application
+**Save For Later List:** Save recommendations to three different types of "Save for later" lists to keep track of what you want to check out for a particular type of media, and have access to these list across all executions of the application
 
 
 ### Target audience:
