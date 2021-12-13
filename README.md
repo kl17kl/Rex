@@ -11,17 +11,17 @@ The purpose of the app is very straightforward, to take in a piece of media (mus
 
 ### Features:
 
-Multiple Category Support - Switch between "music", "movie", and "show" tabs to explore various forms of entertainment
+:star: **Multiple Category Support:** Switch between "music", "movie", and "show" tabs to explore various forms of entertainment
 
-Simple Recommendation Engine - Upon searching, instantly receive multiple recommendations based on your search query powered by the TasteDive API
+:star: **Simple Recommendation Engine:** Upon searching, instantly receive multiple recommendations based on your search query powered by the TasteDive API
 
-Interact With Results - For each recommendation you receive, click on it to see more information and be presented with further options
+:star: **Interact With Results:** For each recommendation you receive, click on it to see more information and be presented with further options
 
-Watch Youtube Previews - Recommendation that you select for all forms of media are presented with teaser videos embedded and ready to watch
+:star: **Watch Youtube Previews:** Recommendations that you select for all forms of media are oftentimes presented with relevant videos (if applicable)
 
-Cascade Your Search - With any selected recommendation, have the option to "See similar" to perform a new query and find even more related content
+:star: **Cascade Your Search:** With any selected recommendation, have the option to "See similar" to perform a new query and find even more related content
 
-Save For Later List - Save recommendations to a "Save for later" list to keep track of what you want to check out, and have access to this list across all executions of the application
+:star: **Save For Later List:** Save recommendations to three different types of "Save for later" lists to keep track of what you want to check out for a particular type of media, and have access to these list across all executions of the application
 
 
 ### Target audience:
