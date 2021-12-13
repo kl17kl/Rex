@@ -63,10 +63,19 @@ public class PopupResult extends Activity {
 
         // Display result details
         popupTitle.setText(selectedResult.getName()+"\n");
-        Spanned link = Html.fromHtml(selectedResult.getWikiURL());
-        popupDescription.setText(selectedResult.getDescription().substring(0,150)+"..."+"\n"+ link);
-        popupDescription.setMovementMethod(LinkMovementMethod.getInstance());
-        showVid(selectedResult.getYoutubeID());
+        try {
+            Spanned link = Html.fromHtml(selectedResult.getWikiURL());
+            popupDescription.setText(selectedResult.getDescription().substring(0, 150) + "..." + "\n" + link);
+        } catch(Exception e) {popupDescription.setText("Description not available.");}
+        try {
+            popupDescription.setMovementMethod(LinkMovementMethod.getInstance());
+        } catch(Exception e) {}
+        try {
+            showVid(selectedResult.getYoutubeID());
+        } catch(Exception e) {
+            popupYoutube.setBackgroundColor(getColor(R.color.black));
+            popupDescription.setText("Description and video not available.");
+        }
     }
 
     /** This method assigns the popup screen dimensions.
@@ -93,20 +102,25 @@ public class PopupResult extends Activity {
      */
     @SuppressLint("SetJavaScriptEnabled")
     private void showVid(String videoID) {
+        try {
             WebView youtubeWebView = (WebView) findViewById(R.id.popupYoutube);
             youtubeWebView.setWebViewClient(new
-            WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading (WebView view, String url){
-                    return false;
-                }
-            });
+                                                    WebViewClient() {
+                                                        @Override
+                                                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                                            return false;
+                                                        }
+                                                    });
             WebSettings webSettings = youtubeWebView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webSettings.setLoadWithOverviewMode(true);
             webSettings.setNeedInitialFocus(false);
             webSettings.setUseWideViewPort(true);
-            youtubeWebView.loadUrl("https://www.youtube.com/embed/"+videoID);
+            youtubeWebView.loadUrl("https://www.youtube.com/embed/" + videoID);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
