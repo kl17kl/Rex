@@ -2,8 +2,11 @@ package com.example.rex;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +41,20 @@ public class PopupFavourites extends Activity {
 
         // Populate the listView with watchlist items of the given type
         setFavouritesAdapter();
+
+        // Onclick listener for listView items (when a user selects a recommendation)
+        favouritesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Get the selected result item
+                Result selected = (Result) adapterView.getItemAtPosition(i);
+
+                // Open popup with selected item details
+                Intent intent = new Intent(PopupFavourites.this, PopupRemove.class);
+                intent.putExtra("selected", selected.getName());
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -48,6 +65,7 @@ public class PopupFavourites extends Activity {
         if (MainActivity.queryType.equals("movies")) type = 1;
         else if (MainActivity.queryType.equals("shows")) type = 2;
 
+        currentFavourites.clear();
         for (Result r : MainActivity.allFavourites) {
             if (type == 0 && r.getType().equals("music")) currentFavourites.add(r);
             else if (type == 1 && r.getType().equals("movie")) currentFavourites.add(r);
@@ -82,4 +100,14 @@ public class PopupFavourites extends Activity {
         favouritesListView.setAdapter(favouritesAdapter);
     }
 
+    /**
+     * When the user removes an item from their favourites list, the favourites list should get
+     * updated on the favourites popup display.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getFavouritesListType();
+        setFavouritesAdapter();
+    }
 }

@@ -22,6 +22,8 @@
             android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".PopupResult"
             android:theme="@style/AppTheme.CustomTheme"/>
+        <activity android:name=".PopupRemove"
+            android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>

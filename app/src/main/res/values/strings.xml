@@ -24,4 +24,7 @@
     <string name="search_copy">Search for a</string>
     <string name="default_search_copy">Search for a musical artist…</string>
     <string name="watchlist">WatchList</string>
+    <string name="remove_from_favourites">Remove from favourites</string>
+    <string name="remove">Remove</string>
+    <string name="cancel">Cancel</string>
 </resources>
