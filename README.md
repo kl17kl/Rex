@@ -3,6 +3,7 @@
 **App name:** Rexplore  
 **Authors:** Katie Lee & Jesse Masciarelli  
 **Platform:** Android  
+**Note:** Please see below for a demo of our app!
 
 ## Overview: 
 Rexplore is an application where users can go for quick music, TV show, and movie suggestions. Users can prompt the app with media that they know they enjoy, and will receive the best music, show, or movie matches back.  
