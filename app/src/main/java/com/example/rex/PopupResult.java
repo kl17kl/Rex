@@ -14,8 +14,10 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents the Popup activity for the selected result (recommendation) item...
@@ -108,8 +110,21 @@ public class PopupResult extends Activity {
      * @param view the View
      */
     public void addToFavourites(View view) {
-        MainActivity.allFavourites.add(selectedResult);
-        MainActivity.saveToInternalStorage(this, "favList","favKey");
+        List<Result> favList = MainActivity.allFavourites;
+        Boolean exists = false;
+
+        for(Result r: favList) {
+            if (r.getName().equals(selectedResult.getName()) && r.getType().equals(selectedResult.getType())) {
+                exists = true;
+            }
+        }
+        if(exists){
+            Toast.makeText(getApplicationContext(),"Already added to watch later.",Toast.LENGTH_SHORT).show();
+        }else{
+                MainActivity.allFavourites.add(selectedResult);
+                MainActivity.saveToInternalStorage(this, "favList","favKey");
+                Toast.makeText(getApplicationContext(),"Added to watch later!",Toast.LENGTH_SHORT).show();
+            }
     }
 
     /**
