@@ -21,11 +21,13 @@ public class PopupFavourites extends Activity {
     TextView popupTitle, popupCopy;
     ListView favouritesListView;
     ArrayList<Result> currentFavourites = new ArrayList<>();
+    static boolean popupRemove = false;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Set-up saved instances, layout, and widgets
+        MainActivity.popUpFavourites = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_favourites);
         initWidgets();
@@ -48,10 +50,12 @@ public class PopupFavourites extends Activity {
                 // Get the selected result item
                 Result selected = (Result) adapterView.getItemAtPosition(i);
 
-                // Open popup with selected item details
-                Intent intent = new Intent(PopupFavourites.this, PopupRemove.class);
-                intent.putExtra("selected", selected.getName());
-                startActivity(intent);
+                // Open popup with selected item details - only one instance at a time
+                if (!popupRemove) {
+                    Intent intent = new Intent(PopupFavourites.this, PopupRemove.class);
+                    intent.putExtra("selected", selected.getName());
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -108,5 +112,11 @@ public class PopupFavourites extends Activity {
         super.onResume();
         getFavouritesListType();
         setFavouritesAdapter();
+    }
+
+    @Override
+    public void onDestroy() {
+        MainActivity.popUpFavourites = false;
+        super.onDestroy();
     }
 }

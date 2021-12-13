@@ -29,6 +29,7 @@ public class PopupRemove extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Set-up saved instances, layout, and widgets
+        PopupFavourites.popupRemove = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_remove);
 
@@ -74,5 +75,12 @@ public class PopupRemove extends Activity {
      */
     public void cancel(View view) {
         finish();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        PopupFavourites.popupRemove = false;
+        super.onDestroy();
     }
 }

@@ -36,6 +36,7 @@ public class PopupResult extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Set-up saved instances, layout, and widgets
+        MainActivity.popUpResult = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_result);
         initWidgets();
@@ -43,7 +44,6 @@ public class PopupResult extends Activity {
         // Retrieve passed result name from previous activity
         Bundle extras = getIntent().getExtras();
         if(extras != null) result = extras.getString("selected");
-
 
         // Define pop-up screen dimensions
         initDimensions();
@@ -136,6 +136,12 @@ public class PopupResult extends Activity {
         MainActivity.searchBox.setText(result);
         MainActivity.newSearch = true;
         finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        MainActivity.popUpResult = false;
+        super.onDestroy();
     }
 
 }

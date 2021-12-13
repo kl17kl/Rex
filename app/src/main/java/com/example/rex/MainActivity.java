@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     int queryLimit = 10;         // Max results returned
     int queryInfo = 1;          // 1 = Display additional info
     static boolean newSearch = false;
+    static boolean popUpResult = false;
+    static boolean popUpFavourites = false;
 
     // Returned JSON results from API call
     JSONArray infoArray, resultsArray;
@@ -70,14 +72,16 @@ public class MainActivity extends AppCompatActivity {
                 // Get the selected result item
                 Result selected = (Result) adapterView.getItemAtPosition(i);
 
-                // Open popup with selected item details
-                Intent intent = new Intent(MainActivity.this, PopupResult.class);
-                intent.putExtra("selected", selected.getName());
-                startActivity(intent);
-
+                // Open popup with selected item details - only allow one instance at a time
+                if (!popUpResult) {
+                    Intent intent = new Intent(MainActivity.this, PopupResult.class);
+                    intent.putExtra("selected", selected.getName());
+                    startActivity(intent);
+                }
             }
         });
     }
+
 
     /**
      * This method converts the data retrieved from internal storage (String) to an ArrayList
@@ -98,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return favouritesList;
     }
-
 
     /**
      * This method sets up the ResultsAdapter to populate the listView with all the
@@ -320,7 +323,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openFavourites(View view){
         // Start a new popup activity
-        startActivity(new Intent(MainActivity.this, PopupFavourites.class));
+        if (!popUpFavourites)
+            startActivity(new Intent(MainActivity.this, PopupFavourites.class));
     }
 
     /**
